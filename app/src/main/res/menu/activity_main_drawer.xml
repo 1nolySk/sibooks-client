@@ -16,6 +16,6 @@
         <item
             android:id="@+id/nav_penerbit"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Penerbit" />
+            android:title="@string/penerbit" />
     </group>
 </menu>
