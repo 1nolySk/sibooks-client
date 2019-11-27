@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.dev.kedaiit.sibooks.R;
-import com.dev.kedaiit.sibooks.ui.kategori.KategoriViewModel;
 
 public class PenerbitFragment extends Fragment {
 

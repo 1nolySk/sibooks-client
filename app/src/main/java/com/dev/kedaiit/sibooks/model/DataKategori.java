@@ -1,13 +1,8 @@
-package com.dev.kedaiit.sibooks.ModelData;
+package com.dev.kedaiit.sibooks.model;
 
-public class ModelDataKategori {
+public class DataKategori {
     public String getId_kategori() {
         return id_kategori;
-    }
-
-    public ModelDataKategori(String id_kategori, String kategori){
-        this.id_kategori = id_kategori;
-        this.kategori = kategori;
     }
 
     public void setId_kategori(String id_kategori) {
@@ -24,5 +19,8 @@ public class ModelDataKategori {
 
     String id_kategori, kategori;
 
-    public ModelDataKategori(){}
+    public DataKategori(){
+        this.id_kategori = id_kategori;
+        this.kategori = kategori;
+    }
 }

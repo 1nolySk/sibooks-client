@@ -1,4 +1,4 @@
-package com.dev.kedaiit.sibooks.Adapter;
+package com.dev.kedaiit.sibooks.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,23 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dev.kedaiit.sibooks.ModelData.ModelDataKategori;
 import com.dev.kedaiit.sibooks.R;
+import com.dev.kedaiit.sibooks.model.DataKategori;
+import com.dev.kedaiit.sibooks.ui.kategori.InsertKategori;
 
 import java.util.List;
 
 public class AdapterDataKategori extends RecyclerView.Adapter<AdapterDataKategori.HolderData> {
-    private List<ModelDataKategori> mItems;
+    private List<DataKategori> mItems;
     private Context context;
 
-    public AdapterDataKategori(Context context, List<ModelDataKategori> items){
+    public AdapterDataKategori(Context context, List<DataKategori> items){
         this.mItems = items;
         this.context = context;
     }
-
 
     @Override
     public HolderData onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,32 +32,30 @@ public class AdapterDataKategori extends RecyclerView.Adapter<AdapterDataKategor
     }
 
     @Override
-    public void onBindViewHolder(HolderData holder, int position) {
-        ModelDataKategori md = mItems.get(position);
+    public void onBindViewHolder(HolderData holder, int position){
+        DataKategori md = mItems.get(position);
         holder.tv_kategori.setText(md.getKategori());
         holder.md = md;
-
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return mItems.size();
     }
 
-    class HolderData extends RecyclerView.ViewHolder {
+    class HolderData extends RecyclerView.ViewHolder{
         TextView tv_kategori;
-        ModelDataKategori md;
-        public HolderData (View view) {
+        DataKategori md;
+        public HolderData (View view){
             super(view);
 
             tv_kategori = (TextView) view.findViewById(R.id.tv_kategori);
-
-            view.setOnClickListener(new View.OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public void onClick(View view) {
-                    Intent update = new Intent(context, InserData.class);
-                    update.putExtra("update",1);
-                    update.putExtra("id_kategori",md.getId_kategori());
+                public void onClick(View view){
+                    Intent update = new Intent(context, InsertKategori.class);
+                    update.putExtra("update", 1);
+                    update.putExtra("id_kategori", md.getId_kategori());
                     update.putExtra("kategori",md.getKategori());
                 }
             });

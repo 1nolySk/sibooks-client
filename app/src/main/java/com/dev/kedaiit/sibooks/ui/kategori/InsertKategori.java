@@ -1,4 +1,4 @@
-package com.dev.kedaiit.sibooks.crud;
+package com.dev.kedaiit.sibooks.ui.kategori;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.dev.kedaiit.sibooks.R;
-import com.dev.kedaiit.sibooks.fragment.FragmentKategori;
 import com.dev.kedaiit.sibooks.util.AppController;
 import com.dev.kedaiit.sibooks.util.ServerAPI;
 
@@ -75,7 +74,7 @@ public class InsertKategori extends AppCompatActivity {
         btnbatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent main = new Intent(InsertKategori.this, FragmentKategori.class);
+                Intent main = new Intent(InsertKategori.this, KategoriFragment.class);
                 startActivity(main);
             }
         });
@@ -99,7 +98,7 @@ public class InsertKategori extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        startActivity( new Intent(InsertKategori.this,FragmentKategori.class));
+                        startActivity( new Intent(InsertKategori.this,KategoriFragment.class));
                     }
                 },
                 new Response.ErrorListener() {
@@ -122,8 +121,6 @@ public class InsertKategori extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(updateReq);
     }
 
-
-
     private void simpanData()
     {
 
@@ -143,7 +140,7 @@ public class InsertKategori extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        startActivity( new Intent(InsertKategori.this,FragmentKategori.class));
+                        startActivity( new Intent(InsertKategori.this,KategoriFragment.class));
                     }
                 },
                 new Response.ErrorListener() {

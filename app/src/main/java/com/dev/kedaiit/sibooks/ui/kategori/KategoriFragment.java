@@ -1,35 +1,110 @@
 package com.dev.kedaiit.sibooks.ui.kategori;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.dev.kedaiit.sibooks.R;
+import com.dev.kedaiit.sibooks.adapter.AdapterDataKategori;
+import com.dev.kedaiit.sibooks.model.DataKategori;
+import com.dev.kedaiit.sibooks.util.ServerAPI;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class KategoriFragment extends Fragment {
+    private RecyclerView recyclerView;
 
-    private KategoriViewModel kategoriViewModel;
+    private LinearLayoutManager linearLayoutManager;
+    private DividerItemDecoration dividerItemDecoration;
+    private List<DataKategori> list;
+    private RecyclerView.Adapter adapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        kategoriViewModel =
-                ViewModelProviders.of(this).get(KategoriViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_kategori, container, false);
-        final TextView textView = root.findViewById(R.id.text_kategori);
-        kategoriViewModel.getText().observe(this, new Observer<String>() {
+
+    public KategoriFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_kategori, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerViewKategori);
+
+        list = new ArrayList<DataKategori>();
+        adapter = new AdapterDataKategori(getContext(), list);
+
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setAdapter(adapter);
+
+        getData();
+
+        return view;
+    }
+
+    private void getData() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        JsonObjectRequest my_request = new JsonObjectRequest(Request.Method.GET, ServerAPI.URL_DATA_KATEGORI, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONArray jsonArray = response.getJSONArray("data");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject Jobj = jsonArray.getJSONObject(i);
+
+                        DataKategori obj = new DataKategori();
+                        obj.setId_kategori(Jobj.getString("id_kategori"));
+                        obj.setKategori(Jobj.getString("kategori"));
+
+                        list.add(obj);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", "Error: " + error.getMessage());
+                progressDialog.dismiss();
             }
         });
-        return root;
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(my_request);
     }
 }
