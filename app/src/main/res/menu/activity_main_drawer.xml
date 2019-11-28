@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@android:drawable/ic_menu_share"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_kategori"
@@ -18,4 +18,22 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/penerbit" />
     </group>
+
+    <item
+        android:title="@string/navigation_drawer_sub_menu_title"
+        android:id="@+id/section">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@android:drawable/ic_menu_share"
+                    android:title="@string/share"/>
+
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@android:mipmap/sym_def_app_icon"
+                    android:title="@string/nav_menu_title_about"/>
+            </group>
+        </menu>
+    </item>
 </menu>

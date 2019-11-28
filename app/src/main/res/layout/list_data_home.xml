@@ -17,8 +17,8 @@
         android:layout_weight="4"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_penerbit"
-            android:hint="Penerbit"
+            android:id="@+id/tv_home"
+            android:hint="Home"
             android:layout_width="match_parent"
             android:layout_height="30dp"/>
     </LinearLayout>

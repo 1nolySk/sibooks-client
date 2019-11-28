@@ -45,6 +45,7 @@ public class AdapterDataPenerbit extends RecyclerView.Adapter<AdapterDataPenerbi
 
     }
 
+
     @Override
     public int getItemCount(){
         return mItems.size();

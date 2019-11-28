@@ -1,6 +1,7 @@
 package com.dev.kedaiit.sibooks.ui.kategori;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.dev.kedaiit.sibooks.R;
 import com.dev.kedaiit.sibooks.adapter.AdapterDataKategori;
 import com.dev.kedaiit.sibooks.model.DataKategori;
 import com.dev.kedaiit.sibooks.util.ServerAPI;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +34,7 @@ import java.util.List;
 
 public class KategoriFragment extends Fragment {
     private RecyclerView recyclerView;
-
+    private FloatingActionButton floatingActionButton;
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     private List<DataKategori> list;
@@ -46,7 +48,7 @@ public class KategoriFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_kategori, container, false);
+        final View view = inflater.inflate(R.layout.fragment_kategori, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewKategori);
 
@@ -62,6 +64,14 @@ public class KategoriFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(adapter);
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),InsertKategori.class);
+                startActivity(intent);
+            }
+        });
         getData();
 
         return view;

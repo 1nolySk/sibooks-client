@@ -43,7 +43,6 @@ public class InsertPenerbit extends AppCompatActivity {
         String intent_penerbit = data.getStringExtra("penerbit");
         /*end get data from intent*/
 
-        id_penerbit = (EditText) findViewById(R.id.edt_idpenerbit);
         penerbit = (EditText) findViewById(R.id.edt_penerbit);
         btnbatal = (Button) findViewById(R.id.btn_cancel);
         btnsimpan = (Button) findViewById(R.id.btn_simpan);
