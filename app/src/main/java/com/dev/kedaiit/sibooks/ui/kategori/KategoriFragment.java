@@ -46,7 +46,7 @@ public class KategoriFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_kategori, container, false);
 
@@ -64,14 +64,18 @@ public class KategoriFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(adapter);
 
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton delKtg = (FloatingActionButton) view.findViewById(R.id.delKtg);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),InsertKategori.class);
+                Intent intent = new Intent(view.getContext(), InsertKategori.class);
                 startActivity(intent);
             }
         });
+
         getData();
 
         return view;

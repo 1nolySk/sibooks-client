@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InsertKategori extends AppCompatActivity {
-    EditText id_kategori, kategori;
+    EditText id_kategori,kategori;
     Button btnbatal, btnsimpan;
     ProgressDialog pd;
 
@@ -42,6 +42,7 @@ public class InsertKategori extends AppCompatActivity {
         String intent_kategori = data.getStringExtra("kategori");
         /*end get data from intent*/
 
+//        id_kategori = (EditText) findViewById(R.id.edt_idkategori);
         kategori = (EditText) findViewById(R.id.edt_kategori);
         btnbatal = (Button) findViewById(R.id.btn_cancel);
         btnsimpan = (Button) findViewById(R.id.btn_simpan);
